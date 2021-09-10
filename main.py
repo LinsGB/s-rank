@@ -12,7 +12,7 @@ def read_data():
 
 
 def get_best_fiis(data):
-    build_data()
+    #build_data()
     print(get_bests_dy_pvpa(data))
 
 def get_bests_dy_pvpa(data):
@@ -27,9 +27,29 @@ def get_bests_dy_pvpa(data):
                 dys.append([dic,dy])
             if pvpa != 'N/A':
                 pvpas.append([dic,pvpa])
-    dys = sorted(dys, key=lambda dy: dy[1])
+    dys = sorted(dys, key=lambda dy: dy[1])[::-1]
     pvpas = sorted(pvpas, key=lambda pvpa: pvpa[1])
-    return {'dy': dys[-14:][::-1], 'pvpa': pvpas[:14]}
+    add_grade_to_list(dys)
+    add_grade_to_list(pvpas)
+    return build_fii_rank(dys, pvpas)
+
+def build_fii_rank(dys, pvas):
+    fii_rank = {}
+    for dy in dys:
+        fii_rank[dy[0]] = dy[2]
+    for pva in pvas:
+        if pva[0] in fii_rank:
+            fii_rank[pva[0]] = fii_rank[pva[0]] + pva[2]
+        else:
+            fii_rank[pva[0]] = pva[2]
+    fii_rank = dict(sorted(fii_rank.items(), key=lambda item: item[1])[:14])
+    return fii_rank
+
+def add_grade_to_list(list):
+    x = 1
+    for data in list:
+        data.append(x)
+        x = x+1
 
 def valid_liquidity(liquidity):
     if liquidity > 500:
