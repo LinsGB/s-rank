@@ -35,15 +35,25 @@ def get_bests_dy_pvpa(data):
 
 def build_fii_rank(dys, pvas):
     fii_rank = {}
+    fii_rank_dy = {}
+    fii_rank_pvas = {}
     for dy in dys:
-        fii_rank[dy[0]] = dy[2]
+        fii_rank_dy[dy[0]] = dy[2]
     for pva in pvas:
-        if pva[0] in fii_rank:
-            fii_rank[pva[0]] = fii_rank[pva[0]] + pva[2]
-        else:
-            fii_rank[pva[0]] = pva[2]
+        fii_rank_pvas[pva[0]] = pva[2]
+    for fii in fii_rank_dy.keys():
+        if fii in fii_rank_pvas.keys():
+            fii_rank[fii] = fii_rank_dy[fii]+fii_rank_pvas[fii]
     fii_rank = dict(sorted(fii_rank.items(), key=lambda item: item[1])[:14])
     return fii_rank
+
+def inerjoin_list_return_than(list1, list2):
+    new_list1 = []
+    new_list2 = []
+    for data in list1:
+        if data in list2:
+            new_list1.append(data)
+            new_list2.append(data)
 
 def add_grade_to_list(list):
     x = 1
@@ -52,7 +62,7 @@ def add_grade_to_list(list):
         x = x+1
 
 def valid_liquidity(liquidity):
-    if liquidity > 500:
+    if liquidity > 1000:
         return True
     return False
 
