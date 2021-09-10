@@ -47,14 +47,6 @@ def build_fii_rank(dys, pvas):
     fii_rank = dict(sorted(fii_rank.items(), key=lambda item: item[1])[:14])
     return fii_rank
 
-def inerjoin_list_return_than(list1, list2):
-    new_list1 = []
-    new_list2 = []
-    for data in list1:
-        if data in list2:
-            new_list1.append(data)
-            new_list2.append(data)
-
 def add_grade_to_list(list):
     x = 1
     for data in list:
