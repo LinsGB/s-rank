@@ -1,5 +1,3 @@
-#código para ujudar na estratégia S-RANK com FIIs https://clubedovalor.com.br/blog/melhores-fiis-s-rank/
-
 import json
 
 import requests
