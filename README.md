@@ -8,7 +8,7 @@ A base de dados utilizada foram os fundos no [fundsexplorer](https://www.fundsex
 
 O script vai analizar o DY, P/VPA e a liquidez.<br>
 
-O resultado será algo parecido com a imagem a baixo, um dicionário de {'nome do fundo': nota}
+O resultado será algo parecido com a imagem a baixo, um dicionário de {'nome do fundo': nota}, quanto menor a nota melhor
 ![Sellerfaces](./image/resultado.png)
 
 
