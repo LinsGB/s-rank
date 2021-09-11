@@ -3,6 +3,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
+minimum_liquidity = 1000
+
 def read_data():
     f = open('ranking.json',)
     data = json.load(f)
@@ -10,10 +12,10 @@ def read_data():
 
 
 def get_best_fiis(data):
-    #build_data()
-    print(get_bests_dy_pvpa(data))
+    build_data()
+    print(get_srank_fiis(data))
 
-def get_bests_dy_pvpa(data):
+def get_srank_fiis(data):
     dys = []
     pvpas = []
     for dic in data:
@@ -52,7 +54,7 @@ def add_grade_to_list(list):
         x = x+1
 
 def valid_liquidity(liquidity):
-    if liquidity > 1000:
+    if liquidity > minimum_liquidity:
         return True
     return False
 
