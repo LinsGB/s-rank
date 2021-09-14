@@ -12,6 +12,7 @@ O resultado será algo parecido com a imagem a baixo, um dicionário de {'nome d
 ![Sellerfaces](./image/resultado.png)
 
 
+
 # Tecnologias usadas no projeto.
 
 - json
