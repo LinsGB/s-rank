@@ -3,8 +3,8 @@ import pandas as pd
 
 
 def get_data():
-    soup = requests.get('https://www.fundsexplorer.com.br/ranking')
-    parse_data_table(soup)
+    page = requests.get('https://www.fundsexplorer.com.br/ranking')
+    parse_data_table(page)
 
 
 def parse_data_table(page):
