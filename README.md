@@ -16,4 +16,4 @@ O resultado será algo parecido com a imagem a baixo, um dicionário de {'nome d
 
 - json
 - [requests](https://pypi.org/project/requests/)
-- [BeautifulSoup](https://pypi.org/project/beautifulsoup4/)
+- [pandas](https://pypi.org/project/pandas/)

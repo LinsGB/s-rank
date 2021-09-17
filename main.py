@@ -1,9 +1,9 @@
 import json
 
-import requests
-from bs4 import BeautifulSoup
+import crawler
 
 minimum_liquidity = 1000
+
 
 def read_data():
     f = open('ranking.json',)
@@ -12,8 +12,9 @@ def read_data():
 
 
 def get_best_fiis(data):
-    build_data()
+    crawler.get_data()
     print(get_srank_fiis(data))
+
 
 def get_srank_fiis(data):
     dys = []
@@ -33,6 +34,7 @@ def get_srank_fiis(data):
     add_grade_to_list(pvpas)
     return build_fii_rank(dys, pvpas)
 
+
 def build_fii_rank(dys, pvas):
     fii_rank = {}
     fii_rank_dy = {}
@@ -47,47 +49,25 @@ def build_fii_rank(dys, pvas):
     fii_rank = dict(sorted(fii_rank.items(), key=lambda item: item[1])[:14])
     return fii_rank
 
+
 def add_grade_to_list(list):
     x = 1
     for data in list:
         data.append(x)
         x = x+1
 
+
 def valid_liquidity(liquidity):
     if liquidity > minimum_liquidity:
         return True
     return False
+
 
 def convert_to_number(percentage):
     if percentage != 'N/A':
         return float(percentage.strip('%').replace(',','.'))
     return percentage
 
-def build_data():
-    table_info = {}
-    page = requests.get('https://www.fundsexplorer.com.br/ranking')
-    soup = BeautifulSoup(page.text, 'html.parser')
-    table_ranking = soup.find("table", {"id": "table-ranking"})
-    table_headers = table_ranking.find_all('th')
-    list_headers = []
-    for header in table_headers:
-        list_headers.append(header.get_text())
-    table_row = table_ranking.find('tbody').find_all('tr')
-    list_td_data = []
-    for row in table_row:
-        list_data = []
-        td_data = row.find_all('td')
-        for data in td_data:
-            list_data.append(data.get_text())
-        list_td_data.append(list_data)
-    for item in list_td_data:
-        _dict = {}
-        for index in range(0, len(item)):
-            _dict.update({list_headers[index]: item[index]})
-        table_info[item[0]] = _dict
-
-    with open('ranking.json', 'w') as json_file:
-        json.dump(table_info, json_file)
 
 if __name__ == '__main__':
     read_data()
